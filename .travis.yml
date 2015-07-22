@@ -70,6 +70,10 @@ install:
 - cd SDL2-2.0.1 && ./configure --prefix=$HOME/SDL2 && make && make install
 - cd ..
 - export SDL2DIR=$HOME/SDL2
+- export g++="g++-4.9"
+- export gcc="gcc-4.9"
+- export lcov="lcov-1.9-2"
+
 #- update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 20
 #- update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 20
 #- update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-4.9 9
