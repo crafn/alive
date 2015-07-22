@@ -40,7 +40,7 @@ addons:
   apt:
     sources:
     - ubuntu-toolchain-r-test
-	
+    
 addons:
   apt:
     packages:
@@ -57,7 +57,7 @@ addons:
     - ri1.9.1
     - irb1.9.1 
     - lcov
-	
+    
 install:
 #- if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository --yes ppa:kalakris/cmake; fi
 #- if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; fi
