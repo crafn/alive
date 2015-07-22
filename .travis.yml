@@ -68,7 +68,7 @@ install:
 - tar -xzvf SDL2-2.0.1.tar.gz
 - cd SDL2-2.0.1 && ./configure --prefix=$HOME/SDL2 && make && make install
 - cd ..
-- export SDL2DIR=$HOME/SDL2
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then export SDL2DIR=$HOME/SDL2; fi
 - if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9"; fi
 - alias g++="g++-4.9"
 - alias gcc="gcc-4.9"
