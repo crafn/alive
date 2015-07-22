@@ -70,6 +70,7 @@ install:
 - cd SDL2-2.0.1 && ./configure --prefix=$HOME/SDL2 && make && make install
 - cd ..
 - export SDL2DIR=$HOME/SDL2
+- if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9"; fi
 - alias g++="g++-4.9"
 - alias gcc="gcc-4.9"
 - alias lcov="lcov-1.9-2"
