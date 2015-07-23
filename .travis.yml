@@ -71,7 +71,7 @@ install:
 - if [[ ! -d "$HOME/SDL2" && "$TRAVIS_OS_NAME" == "linux" ]]; then wget http://www.libsdl.org/release/SDL2-2.0.1.tar.gz && tar -xzvf SDL2-2.0.1.tar.gz && cd SDL2-2.0.1 && ./configure --prefix=$HOME/SDL2 && make && make install && cd ..; fi
 
 - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export SDL2DIR=$HOME/SDL2; fi
-- if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9"; fi
+- if [ "$CXX" = "g++" ]; then export CXX="g++-4.9" CC="gcc-4.9"; GPP="yes" fi
 - alias g++="g++-4.9"
 - alias gcc="gcc-4.9"
 - alias lcov="lcov-1.9-2"
@@ -114,24 +114,24 @@ script:
 - if [[ "${COVERITY_SCAN_BRANCH}" != 1 ]]; then cd build; fi
 
 - UseValgrind=OFF
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "g++" && "${COVERITY_SCAN_BRANCH}" != 1  && "${COVERAGE}" == 0 ]]; then UseValgrind=ON; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1  && "${COVERAGE}" == 0 ]]; then UseValgrind=ON; fi
 - if [[ "${COVERITY_SCAN_BRANCH}" != 1 ]]; then cmake -G"Unix Makefiles" .. -DUseValgrind=$UseValgrind; fi
 - if [[ "${COVERITY_SCAN_BRANCH}" != 1 ]]; then make -j2; fi
 - if [[ "${COVERITY_SCAN_BRANCH}" != 1 ]]; then cpack -C Release; fi
 - if [[ "${COVERITY_SCAN_BRANCH}" != 1 ]]; then ctest -VV; fi
 
 after_success:
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "g++" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --directory . --capture --output-file coverage.info; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "g++" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --remove coverage.info '*/3rdParty/*' '/usr/*' --output-file coverage.info; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "g++" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --list coverage.info; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "g++" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then coveralls-lcov coverage.info; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --directory . --capture --output-file coverage.info; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --remove coverage.info '*/3rdParty/*' '/usr/*' --output-file coverage.info; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --list coverage.info; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then coveralls-lcov coverage.info; fi
 
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then fileToUpload=`ls *.dmg`; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fileToUpload=`ls *.deb`; fi
 - hash=`git rev-parse HEAD`
-- if [[ "$CXX" == "g++" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$hash/$fileToUpload; fi
+- if [[ "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$hash/$fileToUpload; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fileToUpload=`ls *.tar.gz`; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$CXX" == "g++" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$hash/$fileToUpload; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$hash/$fileToUpload; fi
 
 language: cpp
 
