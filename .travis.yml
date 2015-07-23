@@ -127,7 +127,7 @@ after_success:
 #- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --directory . --capture --output-file coverage.info; fi
 #- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --remove coverage.info '*/3rdParty/*' '/usr/*' --output-file coverage.info; fi
 #- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --list coverage.info; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then $HOME/coveralls/coveralls --exclude '*/3rdParty/*' --exclude '/usr/*' --gcov-options '\-lp'; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then $HOME/.local/bin/coveralls --exclude '*/3rdParty/*' --exclude '/usr/*' --gcov-options '\-lp'; fi
 
 #- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then coveralls-lcov coverage.info; fi
 
