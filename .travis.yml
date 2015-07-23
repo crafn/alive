@@ -77,7 +77,7 @@ install:
 - alias lcov="lcov-1.9-2"
 - alias gcov="gcov-4.9"
 - if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then gem install coveralls-lcov; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then pip install cpp-coveralls; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then pip install --install-option="--prefix=$HOME/coveralls" cpp-coveralls; fi
 
 
 #- if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository --yes ppa:kalakris/cmake; fi
@@ -127,7 +127,7 @@ after_success:
 #- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --directory . --capture --output-file coverage.info; fi
 #- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --remove coverage.info '*/3rdParty/*' '/usr/*' --output-file coverage.info; fi
 #- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then lcov --list coverage.info; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then coveralls --exclude '*/3rdParty/*' --exclude '/usr/*' --gcov-options '\-lp'; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then $HOME/coveralls/coveralls --exclude '*/3rdParty/*' --exclude '/usr/*' --gcov-options '\-lp'; fi
 
 #- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" != 1 && "${COVERAGE}" == 1 ]]; then coveralls-lcov coverage.info; fi
 
