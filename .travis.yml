@@ -105,6 +105,10 @@ install:
 
 script: 
 - $CXX --version
+- echo ${COVERITY_SCAN_BRANCH}
+- echo $COVERITY_SCAN_BRANCH
+- echo $TRAVIS_OS_NAME
+- echo ${COVERAGE}
 
 - if [[ "${COVERITY_SCAN_BRANCH}" != 1 ]]; then mkdir build; fi
 - if [[ "${COVERITY_SCAN_BRANCH}" != 1 ]]; then cd build; fi
