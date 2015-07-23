@@ -75,7 +75,7 @@ install:
 - alias g++="g++-4.9"
 - alias gcc="gcc-4.9"
 - alias lcov="lcov-1.9-2"
-
+- alias gcov="gcov-4.9"
 
 #- if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository --yes ppa:kalakris/cmake; fi
 #- if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; fi
