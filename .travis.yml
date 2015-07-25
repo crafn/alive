@@ -95,7 +95,8 @@ after_success:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then fileToUpload=`ls *.dmg`; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fileToUpload=`ls *.deb`; fi
 - hash=`git rev-parse HEAD`
-- branch_name='git branch'
+- branch_name=`git branch`
+- echo $hash $branch_name
 - if [[ "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$branch/$hash/; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fileToUpload=`ls *.tar.gz`; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$branch/$hash/$fileToUpload; fi
