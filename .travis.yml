@@ -96,9 +96,9 @@ after_success:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fileToUpload=`ls *.deb`; fi
 - hash=`git rev-parse HEAD`
 - echo $hash $TRAVIS_BRANCH
-- if [[ "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$hash/; fi
+- if [[ "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$TRAVIS_BRANCH/$hash/; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fileToUpload=`ls *.tar.gz`; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$hash/$TRAVIS_BRANCH_$fileToUpload; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$TRAVIS_BRANCH.$hash/$fileToUpload; fi
 
 language: cpp
 
