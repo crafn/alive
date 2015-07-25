@@ -95,11 +95,10 @@ after_success:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then fileToUpload=`ls *.dmg`; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fileToUpload=`ls *.deb`; fi
 - hash=`git rev-parse HEAD`
-- branch_name=`git rev-parse --abbrev-ref HEAD`
-- echo $hash $branch_name
-- if [[ "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$branch/$hash/; fi
+- echo $hash $TRAVIS_BRANCH
+- if [[ "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$TRAVIS_BRANCH/$hash/; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then fileToUpload=`ls *.tar.gz`; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$branch/$hash/$fileToUpload; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" && "$GPP" == "yes" && "${COVERITY_SCAN_BRANCH}" == 0 && "${COVERAGE}" == 0 ]]; then curl --ftp-create-dirs -T $fileToUpload -u $FTP_USER:$FTP_PASSWORD ftp://mlgthatsme.com/$TRAVIS_BRANCH/$hash/$fileToUpload; fi
 
 language: cpp
 
